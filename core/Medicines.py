@@ -57,7 +57,20 @@ class MedicineDatabase:
         self.medicines[medicine.code] = medicine
 
     #Searching for medicine
-    
+    def search_by_code(self, code):
+        code = code.strip().upper()
+        return self.medicines.get(code)
     
     #Deleting medicine
-    def 
+    def delete_medidicine(self,code)
+        code = code.strip().upper()
+        if code in self.medicines:
+            del self.medicines[code]
+            return True
+        return False 
+    
+    def list_all_medicines(self):
+        return list(self.medicines.values())
+    
+    def is_empty(self):
+        return len(self.medicines) ==0
