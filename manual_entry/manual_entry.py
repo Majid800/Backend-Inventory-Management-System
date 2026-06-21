@@ -21,16 +21,16 @@ def get_non_empty_input(prompt: str):
 def get_positive_int(prompt: str):
     while True:
         value= input(prompt).strip()
-    try:
-        number = int(value)
+        try:
+            number = int(value)
 
         if number < 0:
             print("Please enter a number of 0 or more")
             continue 
-        return number 
+            return number 
 
-    except ValueError:
-        print("Please enter a whole number.")
+        except ValueError:
+            print("Please enter a whole number.")
 
 def get_yes_No(prompt:str):
     while True:
