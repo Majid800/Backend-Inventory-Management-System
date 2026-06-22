@@ -1,4 +1,4 @@
-from core.medicines_database import MedicineDatabase
+from medicines_database import MedicineDatabase
 from manual_entry import (add_medicine_manually, search_medicine_manually, delete_medicine_manually, list_all_medicines)
 
 def display_menu():
@@ -12,7 +12,7 @@ def display_menu():
     print("4. List All Medicines")
     print("5. Exit")
 
-    def main():
+def main():
         database = MedicineDatabase()
 
         while True: 

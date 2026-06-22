@@ -45,5 +45,3 @@ class Medicine:
         )
         
 
-med1 = Medicine(name = "Amlodipine", strength = "10mg", formulation = "tablets", tablets_per_pack= 28, is_controlled= False, manufacturer = "Teva", code = "AML10TAB")
-print(med1)

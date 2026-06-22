@@ -5,9 +5,9 @@
 # - Create Medicine Object
 # - Save to Database
 
-from core.medicines import Medicine 
-from core.medicines_database import MedicineDatabase 
-from core.code_generator import generate_medicine_code 
+from medicines import Medicine 
+from medicines_database import MedicineDatabase 
+from code_generator import generate_medicine_code 
 
 #While true loop to get a non empty input
 def get_non_empty_input(prompt: str):
@@ -24,9 +24,9 @@ def get_positive_int(prompt: str):
         try:
             number = int(value)
 
-        if number < 0:
-            print("Please enter a number of 0 or more")
-            continue 
+            if number < 0:
+                print("Please enter a number of 0 or more")
+                continue 
             return number 
 
         except ValueError:
