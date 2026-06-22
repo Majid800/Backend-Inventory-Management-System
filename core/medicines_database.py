@@ -1,5 +1,6 @@
 #storing medicine records within database and provide add/search/delete/list functionality. Uses medicine code as the unique key 
 from typing import Dict, List, Optional 
+from medicines import Medicine 
 class MedicineDatabase:
     def __init__(self):
         self.medicines: Dict[str, Medicine] = {}
@@ -16,7 +17,7 @@ class MedicineDatabase:
         return self.medicines.get(code)
     
     #Deleting medicine
-    def delete_medidicine(self,code)
+    def delete_medidicine(self,code):
         code = code.strip().upper()
         if code in self.medicines:
             del self.medicines[code]
