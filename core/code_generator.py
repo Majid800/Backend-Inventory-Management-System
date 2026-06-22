@@ -21,16 +21,14 @@ def generate_medicine_code(name, strength, formulation):
         if character.isdigit():
             strength_digits = strength_digits + character 
 
-    form = form.lower()
+    cleaned_form = ""
+    formulation = formulation.lower()
 
-    if form == "tablets":
-        form_part == "TAB"
-    elif form == "capsules":
-        form_part == "CAP"
-    elif form == "cream":
-        form_part == "CRM"
-    else: 
-        form_part = form[:3].upper()
+    for character in formulation:
+        if character.isalpha():
+            cleaned_form = cleaned_form + character 
+    
+    form_part = cleaned_form[:3].upper()
     code = name_part + strength_digits + form_part 
 
     return code 

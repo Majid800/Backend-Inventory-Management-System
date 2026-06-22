@@ -17,7 +17,7 @@ class MedicineDatabase:
         return self.medicines.get(code)
     
     #Deleting medicine
-    def delete_medidicine(self,code):
+    def delete_medicine(self,code):
         code = code.strip().upper()
         if code in self.medicines:
             del self.medicines[code]
