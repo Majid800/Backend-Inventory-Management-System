@@ -63,7 +63,7 @@ def add_medicine_manually(database: MedicineDatabase):
         strength,
         formulation 
     )
-    medicine = Medicine(name = name, strength = strength, formulation = formulation, tablets_per_pack = tablets_per_pack, 
+    medicine = Medicine(name = name, strength = strength, formulation = formulation, pack_size=  pack_size, 
                         manufacturer = manufacturer, code = code, is_controlled = is_controlled)
     
     try:
