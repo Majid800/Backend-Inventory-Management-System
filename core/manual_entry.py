@@ -51,7 +51,7 @@ def add_medicine_manually(database: MedicineDatabase):
     )
     formulation = get_non_empty_input("Forumlation: "
     )
-    tablets_per_pack = get_positive_int("Tablets Per Pack: "
+    pack_size = get_positive_int("Pack size: "
     )
     manufacturer = get_non_empty_input("Manufacturer: "
     )

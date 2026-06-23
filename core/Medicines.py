@@ -9,7 +9,7 @@ class Medicine:
     name: str
     strength: str
     formulation: str 
-    tablets_per_pack: int 
+    pack_size: int 
     manufacturer: str 
     code: str 
     barcode: str =""
@@ -26,7 +26,7 @@ class Medicine:
         self.manufacturer.strip()
 
         #Raising Input Errors
-        if self.tablets_per_pack <0:
+        if self.pack_size <0:
             raise ValueError("tablets per pack cannot be negative")
         if not isinstance(self.is_controlled, bool):
             raise TypeError("Is the drug a controlled drug?")
@@ -37,7 +37,7 @@ class Medicine:
             f"Name: {self.name}\n"
             f"Strength: {self.strength}\n"
             f"Formulation: {self.formulation}\n"
-            f"Tablets per pack: {self.tablets_per_pack}\n"
+            f"Pack size: {self.pack_size}\n"
             f"Code: {self.code}\n"
             f"Barcode: {self.barcode or 'N/A'}\n"
             f"Manufacturer: {self.manufacturer or 'N/A'}\n"
