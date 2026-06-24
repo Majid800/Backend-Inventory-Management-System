@@ -1,0 +1,61 @@
+Commands section:
+
+INSTALLING PACKAGES:
+py -m pip install ______
+
+Entering current directory I want to work in:
+cd (file name)
+
+Go back one file:
+cd ..
+
+Go back two files:
+cd..\..
+
+Clear Terminal:
+cls
+
+Running a file:
+py (filename).py
+
+Stop program immediately inside terminal:
+ctrl + c
+
+PostgreSQL commands:
+SELECT * FROM medicines;
+
+DELETE FROM medicines
+WHERE NAME ='Amlodipine';
+
+Creating a TABLE:
+CREATE TABLE medicines(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL,
+ 	strength VARCHAR(50) NOT NULL,
+ 	formulation VARCHAR(30) NOT NULL,
+    code VARCHAR(20) UNIQUE,
+    barcode VARCHAR(50),
+    manufacturer VARCHAR(100),
+    pack_size INTEGER NOT NULL,
+    notes TEXT,
+	is_controlled BOOLEAN DEFAULT FALSE
+);
+
+unique column:
+UNIQUE 
+
+Must enter a value:
+NOT NULL 
+
+Linking Tables:
+CREATE TABLE stock(
+medicine_code VARCHAR(20) PRIMARY KEY,
+stock_quantity INTEGER NOT NULL DEFAULT 0,
+FOREIGN KEY(medicine_code)
+REFERENCES medicines(code)
+ON DELETE CASCADE
+);
+
+Insert into tablet:
+INSERT INTO x()
+VALUES ('X',Y)

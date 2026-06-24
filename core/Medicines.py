@@ -24,10 +24,11 @@ class Medicine:
         self.code = self.code.strip().upper()
         self.barcode = self.barcode.strip()
         self.manufacturer.strip() if self.manufacturer else None
-
-        #Raising Input Errors
+        
+        
+        #raising errors
         if self.pack_size <0:
-            raise ValueError("tablets per pack cannot be negative")
+            raise ValueError("number must not be negative")
         if not isinstance(self.is_controlled, bool):
             raise TypeError("Is the drug a controlled drug?")
     

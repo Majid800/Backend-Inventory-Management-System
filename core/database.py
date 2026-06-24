@@ -2,8 +2,7 @@ from medicines import Medicine
 import psycopg 
 def connect():
     conn = psycopg.connect(host ="localhost", dbname ="pharmacy_inventory", user="postgres", password ="King1978!")
-    print("Connected Succesfully!")
-    conn.close()
+    return conn 
 
 
 

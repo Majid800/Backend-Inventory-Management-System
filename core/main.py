@@ -1,5 +1,6 @@
 from medicines_database import MedicineDatabase
 from manual_entry import (add_medicine_manually, search_medicine_manually, delete_medicine_manually, list_all_medicines)
+from barcode import add_medicine_by_barcode
 
 def display_menu():
 
@@ -22,7 +23,7 @@ def main():
 
             if choice == "1":
 
-                add_medicine_manually(database)
+                add_medicine_by_barcode()
 
             elif choice == "2":
                 search_medicine_manually(database)
