@@ -23,7 +23,7 @@ class Medicine:
         self.formulation = self.formulation.strip()
         self.code = self.code.strip().upper()
         self.barcode = self.barcode.strip()
-        self.manufacturer.strip()
+        self.manufacturer.strip() if self.manufacturer else None
 
         #Raising Input Errors
         if self.pack_size <0:

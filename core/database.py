@@ -13,6 +13,7 @@ def get_all_medicines():
     cur.execute("SELECT * FROM medicines ORDER BY id ASC;")
     rows = cur.fetchall()
 
+    print("\nid, Name, Strength, Formulation, Medicine Code, Barcode, Manufacturer, Pack size, Controlled Drug\n")
     for row in rows:
         print(row)
 
@@ -24,7 +25,7 @@ def add_medicine(medicine):
         host="localhost",
         dbname="pharmacy_inventory",
         user="postgres",
-        password="King1978"
+        password="King1978!"
     )
         cur = conn.cursor()
         cur.execute(
@@ -74,7 +75,7 @@ def delete_by_code(code):
         host="localhost",
         dbname="pharmacy_inventory",
         user="postgres",
-        password="King1978"
+        password="King1978!"
     )
     cur = conn.cursor()
     cur.execute(
@@ -85,11 +86,22 @@ def delete_by_code(code):
     cur.close()
     conn.close()
 
-
-
-
-
+def search_by_barcode(barcode):
+    conn = psycopg.connect(
+        host="localhost",
+        dbname="pharmacy_inventory",
+        user="postgres",
+        password="King1978!"
+    )
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT * FROM medicines WHERE barcode = %s",
+        (barcode,)
+    )
+    medicine = cur.fetchone()
+    cur.close()
+    conn.close()
+    return medicine
 
 if __name__ == "__main__":
-    result = search_by_code("PAR500TAB")
-    print(result)
+     get_all_medicines()

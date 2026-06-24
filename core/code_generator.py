@@ -20,7 +20,10 @@ def generate_medicine_code(name, strength, formulation):
     for character in strength:
         if character.isdigit():
             strength_digits = strength_digits + character 
+    
+    strength_part = strength_digits[:3]
 
+    
     cleaned_form = ""
     formulation = formulation.lower()
 
@@ -29,6 +32,6 @@ def generate_medicine_code(name, strength, formulation):
             cleaned_form = cleaned_form + character 
     
     form_part = cleaned_form[:3].upper()
-    code = name_part + strength_digits + form_part 
+    code = name_part + strength_part + form_part 
 
     return code 
