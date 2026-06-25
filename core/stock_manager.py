@@ -1,26 +1,38 @@
 from database import connect 
 
+LOW_STOCK_THRESHOLD = 5
 def view_stock():
-    medicine_code = input("Enter medicine code: ").strip().upper()
-    try:
-        conn = connect()
-        cursor = conn.cursor()
-        cursor.execute("""
-            SELECT stock_quantity
-            FROM stock
-            WHERE medicine_code = %s
-        """, (medicine_code,))
-        result = cursor.fetchone()
-        if result:
-            print(f"\nMedicine Code: {medicine_code}")
-            print(f"Stock Quantity: {result[0]}")
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT
+            m.code,
+            m.name,
+            m.strength,
+            m.formulation,
+            COALESCE(s.stock_quantity, 0) AS stock_quantity
+        FROM medicines m
+        LEFT JOIN stock s
+            ON s.medicine_code = m.code
+        ORDER BY m.name ASC;
+    """)
+    rows = cursor.fetchall()
+    print("\n" + "=" * 90)
+    print(f"{'CODE':<12}{'NAME':<20}{'STRENGTH':<12}{'FORM':<12}{'STOCK':<8}{'STATUS'}")
+    print("-" * 90)
+    for code, name, strength, formulation, qty in rows:
+        if qty == 0:
+            status = "OUT OF STOCK"
+        elif qty <= LOW_STOCK_THRESHOLD:
+            status = "LOW STOCK"
         else:
-            print("\nMedicine not found in stock table.")
-    except Exception as e:
-        print(f"Error: {e}")
-    finally:
-        cursor.close()
-        conn.close()
+            status = "OK"
+        print(f"{code:<12}{name:<20}{strength:<12}{formulation:<12}{qty:<8}{status}")
+    print("=" * 90)
+    cursor.close()
+    conn.close()
+
+    
 
 
 def update_stock(medicine_code):
