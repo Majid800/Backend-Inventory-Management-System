@@ -1,5 +1,6 @@
 from medicines import Medicine
 import psycopg 
+
 def connect():
     conn = psycopg.connect(host ="localhost", dbname ="pharmacy_inventory", user="postgres", password ="King1978!")
     return conn 
@@ -102,5 +103,34 @@ def search_by_barcode(barcode):
     conn.close()
     return medicine
 
+def search_medicine_stock(search_term):
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT
+            m.code,
+            m.name,
+            m.strength,
+            m.formulation,
+            m.barcode,
+            COALESCE(s.stock_quantity, 0) AS stock_quantity
+        FROM medicines m
+        LEFT JOIN stock s
+            ON s.medicine_code = m.code
+        WHERE m.barcode = %s
+           OR m.name ILIKE %s
+        ORDER BY
+            CASE WHEN m.barcode = %s THEN 0 ELSE 1 END,
+            m.name ASC,
+            m.strength ASC;
+    """, (search_term, f"{search_term}%", search_term))
+    rows = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return rows
+
+
+
+
 if __name__ == "__main__":
-     get_all_medicines()
+     search_medicine_stock()

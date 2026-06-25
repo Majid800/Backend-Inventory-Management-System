@@ -49,6 +49,8 @@ def update_stock(medicine_code):
     cursor.close()
     conn.close()
 
+
+
 if __name__ =="__main__":
     view_stock()
 
