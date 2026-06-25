@@ -1,6 +1,7 @@
 from medicines_database import MedicineDatabase
 from manual_entry import (add_medicine_manually, search_medicine_manually, delete_medicine_manually, list_all_medicines)
 from barcode import add_medicine_by_barcode
+from stock_manager import view_stock 
 
 def display_menu():
 
@@ -32,7 +33,8 @@ def main():
                 delete_medicine_manually(database)
 
             elif choice =="4":
-                list_all_medicines(database)
+                view_stock()
+                
 
             elif choice == "5":
                 print("\nExiting.")

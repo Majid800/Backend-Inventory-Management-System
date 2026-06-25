@@ -59,3 +59,6 @@ ON DELETE CASCADE
 Insert into tablet:
 INSERT INTO x()
 VALUES ('X',Y)
+
+COALESCE: if something is null use this instead ______
+COALESCE(s.stock_quantity, 0) AS stock_quantity
