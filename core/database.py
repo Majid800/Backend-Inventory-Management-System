@@ -130,7 +130,66 @@ def search_medicine_stock(search_term):
     return rows
 
 
+def delete_medicine():
+    conn = connect()
+    cursor = conn.cursor()
+    search_name = input("Enter medicine name: ").strip()
+    cursor.execute(
+        """
+        SELECT id, name, strength, formulation
+        FROM medicines
+        WHERE LOWER(name) LIKE LOWER(%s)
+        ORDER BY name, strength;
+        """,
+        (f"%{search_name}%",)
+    )
+    medicines = cursor.fetchall()
+    if not medicines:
+        print("No medicines found.")
+        cursor.close()
+        conn.close()
+        return
+    print("\nMatching medicines:\n")
+    for index, medicine in enumerate(medicines, start=1):
+        print(
+            f"{index}. "
+            f"{medicine[1]} "
+            f"{medicine[2]} "
+            f"{medicine[3]}"
+        )
+    try:
+        choice = int(input("\nSelect medicine to delete: "))
+        if choice < 1 or choice > len(medicines):
+            print("Invalid selection.")
+            cursor.close()
+            conn.close()
+            return
+    except ValueError:
+        print("Please enter a valid number.")
+        cursor.close()
+        conn.close()
+        return
+    selected = medicines[choice - 1]
+    confirm = input(
+        f"\nDelete {selected[1]} {selected[2]} {selected[3]}? (Y/N): "
+    ).upper()
+    if confirm == "Y":
+        cursor.execute(
+            """
+            DELETE FROM medicines
+            WHERE id = %s
+            """,
+            (selected[0],)
+        )
+        conn.commit()
+        print("Medicine deleted successfully.")
+    else:
+        print("Deletion cancelled.")
+    cursor.close()
+    conn.close()
+
+
 
 
 if __name__ == "__main__":
-     search_medicine_stock()
+     delete_medicine()
