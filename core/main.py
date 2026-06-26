@@ -1,6 +1,7 @@
 from barcode import add_medicine_by_barcode, search_medicine_by_name_or_barcode
 from stock_manager import view_stock 
 from database import delete_medicine
+from dispense import dispense_stock, cancel_dispensing
 
 def display_menu():
 
@@ -11,7 +12,9 @@ def display_menu():
     print("2. Search Medicine")
     print("3. Delete Medicine")
     print("4. List All Medicines")
-    print("5. Exit")
+    print("5. Dispense Medicine")
+    print("6. Cancel Dispensing")
+    print("7. Exit")
 
 def main():
         
@@ -33,9 +36,14 @@ def main():
 
             elif choice =="4":
                 view_stock()
-                
 
-            elif choice == "5":
+            elif choice =="5":
+                dispense_stock()
+
+            elif choice == "6":
+                cancel_dispensing()
+
+            elif choice == "7":
                 print("\nExiting.")
                 break 
             
