@@ -1,4 +1,3 @@
-from medicines_database import MedicineDatabase
 from barcode import add_medicine_by_barcode, search_medicine_by_name_or_barcode
 from stock_manager import view_stock 
 from database import delete_medicine
@@ -15,7 +14,7 @@ def display_menu():
     print("5. Exit")
 
 def main():
-        database = MedicineDatabase()
+        
 
         while True: 
             display_menu()
