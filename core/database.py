@@ -112,6 +112,7 @@ def search_medicine_stock(search_term):
             m.name,
             m.strength,
             m.formulation,
+            m.manufacturer,
             m.barcode,
             COALESCE(s.stock_quantity, 0) AS stock_quantity
         FROM medicines m
