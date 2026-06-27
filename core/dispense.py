@@ -1,10 +1,15 @@
 from database import connect 
+from barcode import process_barcode
 
 
 def dispense_stock():
     conn = connect()
     cursor = conn.cursor()
     barcode = input("\nScan medicine barcode: ").strip()
+    barcode = process_barcode(barcode)
+    if barcode is None:
+        print("Invalid barcode.")
+        return
     cursor.execute(
         """
         SELECT
@@ -59,6 +64,10 @@ def cancel_dispensing():
     conn = connect()
     cursor = conn.cursor()
     barcode = input("\nScan medicine barcode: ").strip()
+    barcode = process_barcode(barcode)
+    if barcode is None:
+        print("Invalid barcode.")
+        return
     cursor.execute(
         """
         SELECT

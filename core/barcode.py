@@ -2,10 +2,12 @@ from medicines import Medicine
 from database import search_by_barcode, add_medicine, search_medicine_stock
 from code_generator import generate_medicine_code
 from stock_manager import update_stock
+import re 
+
 
 
 def add_medicine_by_barcode():
-    barcode = input("Scan or type barcode: ").strip()
+    barcode = process_barcode(input("Scan or type barcode: ").strip())
 
     existing = search_by_barcode(barcode)
 
@@ -22,9 +24,9 @@ def add_medicine_by_barcode():
     name = input("Name: ").strip()
     strength = input("Strength: ").strip()
     formulation = input("Formulation: ").strip()
-    code = generate_medicine_code(name,strength, formulation)
-    manufacturer = input("Manufacturer (press Enter if unknown): ").strip() or None
+    manufacturer = input("Manufacturer: ").strip() or None
     pack_size = (int(input("Pack size: ").strip()))
+    code = generate_medicine_code(name,strength, formulation, manufacturer, pack_size)
     notes = input("Notes (press Enter if none): ").strip() or None
     is_controlled = input("Is controlled? (y/n): ").strip().lower() == "y"
 
@@ -49,6 +51,10 @@ def add_medicine_by_barcode():
 
 def search_medicine_by_name_or_barcode():
     search_term = input("\nEnter medicine name or barcode: ").strip()
+    processed = process_barcode(search_term)
+    if processed is not None:
+        search_term = processed
+    
     results = search_medicine_stock(search_term)
     if not results:
         print("\nNo medicine found.")
@@ -65,6 +71,22 @@ def search_medicine_by_name_or_barcode():
             status = "OK"
         print(f"{code:<12}{name:<20}{strength:<15}{formulation:<12}{(barcode or 'N/A'):<18}{stock:<8}{status}")
     print("=" * 90)
+
+
+def process_barcode(barcode):
+    barcode = barcode.strip()
+    # Normal EAN-13 barcode
+    if barcode.isdigit() and len(barcode) == 13:
+        return barcode
+    # GS1 barcode
+    match = re.search(r"01(\d{14})", barcode)
+    if match:
+        gtin = match.group(1)
+        # Convert GTIN-14 back to EAN-13
+        if gtin.startswith("0"):
+            return gtin[1:]
+        return gtin
+    return None
 
 
 

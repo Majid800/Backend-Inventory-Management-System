@@ -7,7 +7,7 @@ def display_menu():
 
     print("\n========================")
     print(" Pharmacy Inventory System")
-    print("====================")
+    print("==========================")
     print("1. Add Medicine")
     print("2. Search Medicine")
     print("3. Delete Medicine")

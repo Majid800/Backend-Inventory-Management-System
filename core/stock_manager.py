@@ -18,7 +18,7 @@ def view_stock():
     """)
     rows = cursor.fetchall()
     print("\n" + "=" * 90)
-    print(f"{'CODE':<12}{'NAME':<20}{'STRENGTH':<15}{'FORMULATION':<12}{'STOCK':<8}{'STATUS'}")
+    print(f"{'CODE':<20}{'NAME':<20}{'STRENGTH':<15}{'FORMULATION':<12}{'STOCK':<8}{'STATUS'}")
     print("-" * 90)
     for code, name, strength, formulation, qty in rows:
         if qty == 0:
@@ -27,7 +27,7 @@ def view_stock():
             status = "LOW STOCK"
         else:
             status = "OK"
-        print(f"{code:<12}{name:<20}{strength:<15}{formulation:<12}{qty:<8}{status}")
+        print(f"{code:<20}{name:<20}{strength:<15}{formulation:<12}{qty:<8}{status}")
     print("=" * 90)
     cursor.close()
     conn.close()

@@ -4,7 +4,7 @@
 
 
 
-def generate_medicine_code(name, strength, formulation):
+def generate_medicine_code(name, strength, formulation, manufacturer, pack_size):
     cleaned_name = ""
 
     for character in name:
@@ -32,6 +32,17 @@ def generate_medicine_code(name, strength, formulation):
             cleaned_form = cleaned_form + character 
     
     form_part = cleaned_form[:3].upper()
-    code = name_part + strength_part + form_part 
+
+    cleaned_manufacturer = ""
+    for character in manufacturer:
+        if character.isalpha():
+            cleaned_manufacturer = cleaned_manufacturer + character
+
+    manufacturer_part = cleaned_manufacturer[:3].upper()
+    
+    pack_size_part = str(pack_size)
+
+    
+    code = name_part + strength_part + form_part + manufacturer_part + pack_size_part
 
     return code 
